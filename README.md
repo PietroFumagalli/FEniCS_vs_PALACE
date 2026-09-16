@@ -15,12 +15,12 @@ The benchmark validates the time-harmonic Helmholtz equation by simulating a tra
 **1. Prerequisites**
 You must have [Miniconda](https://docs.anaconda.com/free/miniconda/) or Anaconda installed on your system. 
 
-**2. Clone the repository**
+**2. Installation**
 Download the project to your local machine and navigate into the directory, then create the isolated environment using the provided configuration file. 
 ```bash
 conda env create -f environment.yml
 ```
-then activate the environment:
+Then activate the environment:
 ```bash
 conda activate thesis_env
 ```
