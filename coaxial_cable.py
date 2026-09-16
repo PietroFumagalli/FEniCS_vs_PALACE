@@ -62,6 +62,7 @@ gmsh.model.setPhysicalName(2, 5, "Outer_PEC")
 
 # Generate and save the mesh
 gmsh.model.mesh.generate(3)
+gmsh.option.setNumber("Mesh.MshFileVersion", 2.2)
 gmsh.write("cable.msh")
 
 # gmsh.fltk.run()

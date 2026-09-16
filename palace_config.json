@@ -1,0 +1,52 @@
+{
+  "Problem": {
+    "Type": "Driven",
+    "Verbose": 2,
+    "Output": "palace_output"
+  },
+  "Model": {
+    "Mesh": "cable.msh",
+    "L0": 1.0
+  },
+  "Domains": {
+    "Materials": [
+      {
+        "Attributes": [1],
+        "Permeability": 1.0,
+        "Permittivity": 1.0,
+        "LossTan": 0.0
+      }
+    ]
+  },
+  "Boundaries": {
+    "PEC": {
+      "Attributes": [1, 2]
+    },
+    "Absorbing": {
+      "Attributes": [3],
+      "Order": 1
+    },
+    "WavePort": [
+      {
+        "Index": 1,
+        "Attributes": [4],
+        "Excitation": true,
+        "Mode": 1
+      }
+    ]
+  },
+  "Solver": {
+    "Order": 1,
+    "Driven": {
+      "MinFreq": 0.03,
+      "MaxFreq": 0.03,
+      "FreqStep": 1.0,
+      "SaveStep": 1
+    },
+    "Linear": {
+      "Type": "Default",
+      "Tol": 1e-8,
+      "MaxIts": 1000
+    }
+  }
+}
