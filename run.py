@@ -3,7 +3,6 @@ import sys
 import subprocess
 import time
 import os
-import result
 
 print("COAXIAL CABLE FEM BENCHMARK (Fenics vs Palace)")
 
