@@ -3,3 +3,4 @@ __pycache__/
 *.h5
 *.xdmf
 .DS_Store
+palace_output/
