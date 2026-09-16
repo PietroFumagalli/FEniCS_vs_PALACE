@@ -1,4 +1,4 @@
-# Electromagnetic FEM Benchmark: FEniCS vs. Palace
+# Electromagnetic FEM Benchmark: FEniCS vs Palace
 
 This repository contains a robust, reproducible computational benchmarking suite comparing two Finite Element Method (FEM) solvers: **FEniCS** and **Palace**. 
 
