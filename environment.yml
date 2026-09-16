@@ -1,0 +1,12 @@
+name: thesis_env
+channels:
+  - conda-forge
+dependencies:
+  - python=3.10
+  - fenics-dolfinx=0.10.0
+  - petsc=*=complex*
+  - mpi4py
+  - gmsh
+  - python-gmsh
+  - numpy<2.3
+  - matplotlib

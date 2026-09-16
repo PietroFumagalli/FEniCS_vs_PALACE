@@ -1,0 +1,5 @@
+__pycache__/
+*.msh
+*.h5
+*.xdmf
+.DS_Store
