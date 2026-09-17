@@ -7,6 +7,7 @@ from dolfinx.io import gmsh as d_gmsh
 from dolfinx.io import XDMFFile
 import resource
 import gmsh
+from petsc4py import PETSc
 
 # 1. load the mesh
 gmsh.initialize()
@@ -84,6 +85,18 @@ bc_pec = fem.dirichletbc(u_pec, wall_dofs)
 
 # 7. solve the problem 
 problem = LinearProblem(a, L, bcs=[bc_pec, bc_inlet], petsc_options_prefix="helmholtz_solver")
+
+# force the existing solver to use GMRES
+problem.solver.setType(PETSc.KSP.Type.GMRES)
+problem.solver.getPC().setType(PETSc.PC.Type.ILU)
+problem.solver.setTolerances(rtol=1e-8, max_it=1000)
+
+# Print the residual at each iteration like Palace
+def gmres_monitor(ksp, its, rnorm):
+    print(f"  FEniCS GMRES Iteration {its} | Residual: {rnorm:.4e}")
+
+problem.solver.setMonitor(gmres_monitor)
+
 E_h = problem.solve()
 
 print("Weak form solved successfully!")
