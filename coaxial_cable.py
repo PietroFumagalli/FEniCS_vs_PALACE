@@ -5,10 +5,10 @@ gmsh.option.setNumber("Mesh.Algorithm3D", 1)
 gmsh.option.setNumber("General.Terminal", 0) # suppress terminal output
 gmsh.model.add("coaxial_cable")
 
-# Cap the maximum element size for wave accuracy (lambda/10)
+# cap the maximum element size for wave accuracy (lambda/10)
 gmsh.option.setNumber("Mesh.MeshSizeMax",0.2)
 
-# Allow Gmsh to adaptively use smaller elements down to this size for curved surfaces
+# allow Gmsh to adaptively use smaller elements down to this size for curved surfaces
 gmsh.option.setNumber("Mesh.MeshSizeMin", 0.1)
 
 L = 10.0      # cable length
@@ -21,12 +21,12 @@ gmsh.model.occ.cut([(3, ext)], [(3, int)])
 
 gmsh.model.occ.synchronize()
 
-# Define physical group for the dielectric volume
+# define physical group for the dielectric volume
 volumes = gmsh.model.getEntities(3)
 gmsh.model.addPhysicalGroup(3, [volumes[0][1]], tag=1)
 gmsh.model.setPhysicalName(3, 1, "Dielectric")
 
-# Sort the surfaces to assign the correct boundary tags
+# sort the surfaces to assign the correct boundary tags
 surfaces = gmsh.model.getEntities(2)
 inlet_surfs = []
 outlet_surfs = []
@@ -47,7 +47,7 @@ for dim, tag in surfaces:
         else:
             inner_surfs.append(tag)    # r = 1.0
 
-# 3. Apply the 2D Physical Groups
+# apply the 2D Physical Groups
 gmsh.model.addPhysicalGroup(2, inlet_surfs, tag=2)
 gmsh.model.setPhysicalName(2, 2, "Inlet")
 
@@ -60,7 +60,7 @@ gmsh.model.setPhysicalName(2, 4, "Inner_PEC")
 gmsh.model.addPhysicalGroup(2, outer_surfs, tag=5)
 gmsh.model.setPhysicalName(2, 5, "Outer_PEC")
 
-# Generate and save the mesh
+# generate and save the mesh
 gmsh.model.mesh.generate(3)
 gmsh.option.setNumber("Mesh.MshFileVersion", 2.2)
 gmsh.write("cable.msh")
