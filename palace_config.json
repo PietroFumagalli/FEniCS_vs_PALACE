@@ -18,9 +18,9 @@
       }
     ]
   },
-  "Boundaries": {
+"Boundaries": {
     "PEC": {
-      "Attributes": [1, 2]
+      "Attributes": [4, 5]
     },
     "Absorbing": {
       "Attributes": [3],
@@ -29,7 +29,7 @@
     "WavePort": [
       {
         "Index": 1,
-        "Attributes": [4],
+        "Attributes": [2],
         "Excitation": true,
         "Mode": 1
       }
