@@ -36,7 +36,7 @@ v = ufl.TestFunction(V)
 # integration measure for the boundary facets
 ds = ufl.Measure("ds", domain=domain, subdomain_data=facet_tags)
 
-# 4. weak form definition (Helmholtz Equation)
+# 3. weak form definition (Helmholtz Equation)
 # (\nabla \times E, \nabla \times v) - k^2 (\epsilon_r E, v) = (F, v) + boundary terms (absorbing boundary conditions)
 a = ufl.inner(ufl.curl(E), ufl.curl(v)) * ufl.dx - k_squared * ufl.inner(E, v) * ufl.dx
 im_k0 = fem.Constant(domain, 1j * k0)
@@ -46,7 +46,7 @@ L = ufl.inner(f, v) * ufl.dx
 
 print("Finite element space and weak form configured successfully!")
 
-# 5. inlet boundary condition
+# 4. inlet boundary condition
 
 # define the analytical solution for the trnasverse electromagnetic mode in a coaxial cable,
 #  this is the electrostatic field between two concentric cylinders, which solves the 2D Laplace equation
@@ -72,7 +72,7 @@ inlet_facets = facet_tags.find(2)
 inlet_dofs = fem.locate_dofs_topological(V, fdim, inlet_facets)
 bc_inlet = fem.dirichletbc(u_in, inlet_dofs)
 
-# 6. Dirichlet boundary condition on the tangential component of the electric field on the boundary
+# 5. Dirichlet boundary condition on the tangential component of the electric field on the boundary
 inner_wall_facets = facet_tags.find(4)
 outer_wall_facets = facet_tags.find(5)
 
@@ -83,7 +83,7 @@ u_pec = fem.Function(V)
 u_pec.x.array[:] = 0.0
 bc_pec = fem.dirichletbc(u_pec, wall_dofs)
 
-# 7. solve the problem 
+# 6. solve the problem 
 problem = LinearProblem(a, L, bcs=[bc_pec, bc_inlet], petsc_options_prefix="helmholtz_solver")
 
 # force the existing solver to use GMRES
@@ -91,7 +91,7 @@ problem.solver.setType(PETSc.KSP.Type.GMRES)
 problem.solver.getPC().setType(PETSc.PC.Type.ILU)
 problem.solver.setTolerances(rtol=1e-8, max_it=1000)
 
-# Print the residual at each iteration like Palace
+# print the residual at each iteration like Palace
 def gmres_monitor(ksp, its, rnorm):
     print(f"  FEniCS GMRES Iteration {its} | Residual: {rnorm:.4e}")
 
